@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <string name="tab_1">幽默段子</string>
+    <string name="tab_2">职场</string>
+    <string name="tab_3">工作</string>
+    <string name="tab_4">生活</string>
+</resources>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:background="@drawable/android_title_bg" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="36dip"
+                android:layout_height="36dip"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:src="@drawable/more_game"
+                />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:text="乐够GO"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:src="@drawable/status_online"
+                android:visibility="gone" />
+            <!--  android:visibility:"gone"隐藏控件 ，所以你看不到Imageview-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_tag_group"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dip"
+            android:paddingTop="10dip"
+            android:orientation="horizontal"
+            android:background="@color/coral">
+            <!-- 珊瑚色 -->
+
+            <!--<TextView
+                android:id="@+id/tv_tab_activity"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="@string/tab_1"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+            &lt;!&ndash; 这个是白色，下面的都是灰色 &ndash;&gt;
+            <TextView
+                android:id="@+id/tv_tab_groups"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="@string/tab_2"
+                android:textColor="@color/lightwhite"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_tab_friends"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="@string/tab_3"
+                android:textColor="@color/lightwhite"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_tab_chat"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="@string/tab_4"
+                android:textColor="@color/lightwhite"
+                android:textSize="18sp" />-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_liner_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:background="@color/black"
+            android:paddingBottom="3dip" >
+
+            <ImageView
+                android:id="@+id/iv_bottom_line"
+                android:layout_width="40dip"
+                android:layout_height="2dip"
+                android:scaleType="matrix"
+                android:src="#fff" />
+            <!-- http://blog.csdn.net/qq247890212/article/details/12967135 -->
+        </LinearLayout>
+    </LinearLayout>
+    <!-- 使用ViewPager之前必须导入android-support-v4.jar这个文件，这个jar文件在SDK目录下extras-android-support-v4 -->
+    <!-- http://blog.csdn.net/wangjinyu501/article/details/8169924 -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1.0"
+        android:background="#000000"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation" />
+</LinearLayout>
