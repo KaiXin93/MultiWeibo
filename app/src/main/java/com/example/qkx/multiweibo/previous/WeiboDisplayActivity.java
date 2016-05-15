@@ -33,6 +33,8 @@ import java.util.List;
  * Created by qkx on 2015/11/12.
  */
 public class WeiboDisplayActivity extends Activity implements View.OnClickListener {
+    private final static String TAG = "WeiboDisplayActivity";
+
     private LinearLayout display;
     private ListView listView;
     private MyAdapter adapter;
@@ -93,7 +95,7 @@ public class WeiboDisplayActivity extends Activity implements View.OnClickListen
         //获取AcessToken
         SharedPreferences spf = getSharedPreferences("Oauth", Context.MODE_PRIVATE);
         access_token = spf.getString("access_token", null);
-        Log.d("WeiboDisplayActivity", "access_token ----->" + access_token);
+        Log.d(TAG, "access_token ----->" + access_token);
         queryHome();
 
     }
@@ -104,7 +106,7 @@ public class WeiboDisplayActivity extends Activity implements View.OnClickListen
     private void queryHome() {
         i = (i > 4) ? 4 : i;
         String queryHomeUrl = Constans.HOME_URL + "?access_token=" + access_token + "&count=" + 20 * (i + 1);
-        Log.d("WeiboDisplayActivity", "sendHomeRequst ----->" + queryHomeUrl);
+        Log.d(TAG, "sendHomeRequst ----->" + queryHomeUrl);
         /**
          * 用Volley发送请求
          */
@@ -114,7 +116,7 @@ public class WeiboDisplayActivity extends Activity implements View.OnClickListen
                     public void onResponse(String s) {
                         i++;
                         saveData("response", s);
-                        Log.d("WeiboDisplayActivity", "response ----->" + s);
+                        Log.d(TAG, "response ----->" + s);
                         handleHomeRequest(s);
                     }
                 },
@@ -127,7 +129,7 @@ public class WeiboDisplayActivity extends Activity implements View.OnClickListen
                             handleHomeRequest(response);
                         }
                         Toast.makeText(WeiboDisplayActivity.this, "加载失败...", Toast.LENGTH_SHORT).show();
-                        Log.e("WeiboDisplayActivity", "Error ----->" + volleyError.getMessage());
+                        Log.e(TAG, "Error ----->" + volleyError.getMessage());
                     }
                 });
         mQueue.add(stringRequest);//开始发送请求
@@ -151,7 +153,7 @@ public class WeiboDisplayActivity extends Activity implements View.OnClickListen
     private void saveData(String name, String value) {
         SharedPreferences.Editor editor = getSharedPreferences("Weibo", Context.MODE_PRIVATE).edit();
         editor.putString(name, value);
-        Log.d("WeiboDisplayActivity", "saved response ----->" + value);
+        Log.d(TAG, "saved response ----->" + value);
         editor.commit();
     }
 
@@ -171,7 +173,7 @@ public class WeiboDisplayActivity extends Activity implements View.OnClickListen
             public void run() {
                 adapter.notifyDataSetChanged();
                 closeProgressDialog();
-                Log.d("WeiboDisplayActivity", "ListView has notified");
+                Log.d(TAG, "ListView has notified");
             }
         });
     }
@@ -241,12 +243,12 @@ public class WeiboDisplayActivity extends Activity implements View.OnClickListen
                 viewHolder = new ViewHolder();
                 convertView = View.inflate(getApplicationContext(), R.layout.weibo_detail_layout, null);
 
-                viewHolder.retweetedText = (TextView) convertView.findViewById(R.id.retweeted_text);
+                viewHolder.retweetedText = (TextView) convertView.findViewById(R.id.tv_retweeted_text);
 
                 viewHolder.imageGroup = (RelativeLayout) convertView.findViewById(R.id.imageGroup);
-                viewHolder.headPic = (ImageView) convertView.findViewById(R.id.head_pic);
-                viewHolder.userName = (TextView) convertView.findViewById(R.id.user_name);
-                viewHolder.weiboText = (TextView) convertView.findViewById(R.id.status_text);
+                viewHolder.imgHeadPic = (ImageView) convertView.findViewById(R.id.iv_head_pic);
+                viewHolder.tvUserName = (TextView) convertView.findViewById(R.id.tv_user_name);
+                viewHolder.tvWeiboText = (TextView) convertView.findViewById(R.id.tv_status_text);
 
                 convertView.setTag(viewHolder);
             } else {
@@ -255,12 +257,12 @@ public class WeiboDisplayActivity extends Activity implements View.OnClickListen
             /**
              *暂时显示微博文本内容
              */
-            viewHolder.weiboText.setText(list.get(position).text);
-            viewHolder.userName.setText(list.get(position).user.screen_name);
+            viewHolder.tvWeiboText.setText(list.get(position).text);
+            viewHolder.tvUserName.setText(list.get(position).user.screen_name);
             /**
              * volley加载显示图片
              */
-            ImageLoader.ImageListener headListener = ImageLoader.getImageListener(viewHolder.headPic, R.drawable.ic_launcher, R.drawable.ic_launcher);
+            ImageLoader.ImageListener headListener = ImageLoader.getImageListener(viewHolder.imgHeadPic, R.drawable.ic_launcher, R.drawable.ic_launcher);
             imageLoader.get(list.get(position).user.profile_image_url, headListener);
             /**
              * 在imageGroup中
@@ -312,9 +314,9 @@ public class WeiboDisplayActivity extends Activity implements View.OnClickListen
     }
 
     class ViewHolder {
-        public ImageView headPic;
-        public TextView userName;
-        public TextView weiboText;
+        public ImageView imgHeadPic;
+        public TextView tvUserName;
+        public TextView tvWeiboText;
         public RelativeLayout imageGroup;
 
         public TextView retweetedText;

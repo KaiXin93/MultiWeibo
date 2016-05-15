@@ -44,11 +44,16 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
-
         init();
     }
 
     private void init() {
+        WeiboDB weiboDB = WeiboDB.getInstance(this);
+        users = weiboDB.loadUsers();
+        if (users.isEmpty()) {
+            return;
+        }
+
         mList = new ArrayList<Fragment>();
 
         mViewPager = (ViewPager) findViewById(R.id.vPager);
@@ -56,8 +61,6 @@ public class MainActivity extends FragmentActivity {
         bottomContainer = (LinearLayout) findViewById(R.id.id_liner_bottom);
         ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);
 
-        WeiboDB weiboDB = WeiboDB.getInstance(this);
-        users = weiboDB.loadUsers();
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

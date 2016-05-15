@@ -7,43 +7,45 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.qkx.multiweibo.R;
 import com.example.qkx.multiweibo.db.WeiboDB;
 import com.example.qkx.multiweibo.model.User;
-import com.example.qkx.multiweibo.util.HttpCallbackListener;
-import com.example.qkx.multiweibo.util.HttpUtil;
 import com.google.gson.Gson;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by qkx on 2015/11/1.
  */
 public class QueryAcessToken extends Activity {
     private static final String TAG = "QueryAcessToken";
+    RequestQueue mQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mQueue = Volley.newRequestQueue(this);
         getAcessToken();
     }
     private void getAcessToken() {
-        String code = getCode();
+        final String code = getCode();
         String acess_token_url = Constans.ACESS_TOKEN_URL;
-        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-        pairs.add(new BasicNameValuePair("client_id",Constans.CLIENT_ID));
-        pairs.add(new BasicNameValuePair("client_secret",Constans.CLIENT_SECRECT));
-        pairs.add(new BasicNameValuePair("grant_type","authorization_code"));
-        pairs.add(new BasicNameValuePair("code",code));
-        pairs.add(new BasicNameValuePair("redirect_uri",Constans.REDIRECT_URI));
-        HttpUtil.sendHttpClientPOST(acess_token_url, pairs, new HttpCallbackListener() {
+
+        Response.Listener<String> listener = new Response.Listener<String>() {
             @Override
-            public void onFinish(String response) {
+            public void onResponse(String response) {
                 Log.d(TAG,"response ----->" + response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -59,12 +61,28 @@ public class QueryAcessToken extends Activity {
                     e.printStackTrace();
                 }
             }
-
+        };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
-            public void onError(Exception e) {
-                Log.d(TAG,"response failed ----->" + e.getMessage());
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.d(TAG, "error is " + volleyError.getMessage());
             }
-        });
+        };
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, acess_token_url, listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("client_id", Constans.CLIENT_ID);
+                map.put("client_secret", Constans.CLIENT_SECRECT);
+                map.put("grant_type", "authorization_code");
+                map.put("code", code);
+                map.put("redirect_uri",Constans.REDIRECT_URI);
+                return map;
+            }
+        };
+        mQueue.add(stringRequest);
+
         Intent intent = new Intent(this,FirstActivity.class);
         startActivity(intent);
         finish();

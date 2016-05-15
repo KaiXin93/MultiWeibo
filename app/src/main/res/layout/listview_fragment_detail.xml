@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_test"
+        android:text="state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <com.jaeger.ninegridimageview.NineGridImageView
+        android:id="@+id/ngiv_picGroup_test"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="16dp"
+        app:imgGap="4dp"
+        app:showStyle="grid"
+        app:singleImgSize="120dp"/>
+</LinearLayout>

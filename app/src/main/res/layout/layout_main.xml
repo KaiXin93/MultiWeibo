@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dip"
-                android:text="乐够GO"
+                android:text="MyWeibo"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <ImageView
@@ -121,7 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1.0"
-        android:background="#000000"
+        android:background="@color/grey"
         android:flipInterval="30"
         android:persistentDrawingCache="animation" />
 </LinearLayout>

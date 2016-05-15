@@ -2,16 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#d42828">
+    android:background="@color/grey">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
         android:background="#FFF">
 
         <ImageView
-            android:id="@+id/head_pic"
+            android:id="@+id/iv_head_pic"
             android:layout_width="50dp"
             android:layout_height="50dp" />
         <LinearLayout
@@ -21,47 +24,56 @@
             android:orientation="vertical"
             android:layout_marginLeft="10dp">
             <TextView
-                android:id="@+id/user_name"
+                android:id="@+id/tv_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textColor="#000"
-                android:text="test"/>
+                android:text="userName"/>
             <TextView
-                android:id="@+id/time_device"
+                android:id="@+id/tv_time_device"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
 
         </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/status_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:textSize="15sp"
-        android:text="test"
-        android:layout_marginBottom="5dp"
-        android:background="#FFF"/>
-    <RelativeLayout
-        android:id="@+id/imageGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:padding="10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_status_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:text="statusText"
+            android:background="#FFF"/>
+        <RelativeLayout
+            android:id="@+id/imageGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/retweeted_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="#efefef"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/retweeted_text"
+            android:id="@+id/tv_retweeted_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:background="#efefef"/>
+            android:textColor="#000"/>
         <RelativeLayout
+
             android:id="@+id/retweeted_imageGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -69,10 +81,16 @@
         </RelativeLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:background="#efefef"
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="#FF0">
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -83,7 +101,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@drawable/refresh"/>
+                android:background="@drawable/timeline_topic_icon_retweet"/>
             <TextView
                 android:id="@+id/repost"
                 android:layout_width="wrap_content"
@@ -98,7 +116,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@drawable/refresh"/>
+                android:background="@drawable/timeline_topic_icon_comment"/>
             <TextView
                 android:id="@+id/comment"
                 android:layout_width="wrap_content"
@@ -115,7 +133,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@drawable/refresh"/>
+                android:background="@drawable/timeline_topic_icon_like"/>
             <TextView
                 android:id="@+id/praise"
                 android:layout_width="wrap_content"

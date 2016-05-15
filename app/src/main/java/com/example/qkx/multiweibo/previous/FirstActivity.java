@@ -15,8 +15,8 @@ import com.example.qkx.multiweibo.activity.MainActivity;
  * Created by qkx on 2015/11/1.
  */
 public class FirstActivity extends Activity implements View.OnClickListener{
-    private Button sendOauth;
-    private Button acquireWeibo;
+    private Button btnSendOauth;
+    private Button btnAcquireWeibo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +27,11 @@ public class FirstActivity extends Activity implements View.OnClickListener{
     }
 
     private void init() {
-        sendOauth = (Button) findViewById(R.id.sendOauth);
-        acquireWeibo = (Button) findViewById(R.id.acquireWeibo);
+        btnSendOauth = (Button) findViewById(R.id.sendOauth);
+        btnAcquireWeibo = (Button) findViewById(R.id.acquireWeibo);
 
-        sendOauth.setOnClickListener(this);
-        acquireWeibo.setOnClickListener(this);
+        btnSendOauth.setOnClickListener(this);
+        btnAcquireWeibo.setOnClickListener(this);
     }
 
     @Override
